@@ -1,158 +1,157 @@
 # Timeline Component
 
-Um componente React para visualização de itens em uma timeline com layout compacto e funcionalidades interativas.
+A React component for visualizing items on a timeline with a compact lane layout and interactive features.
 
-## 🚀 Como executar o projeto
+## 🚀 Getting Started
 
 ```bash
-# Instalar dependências
+# Install dependencies
 npm install
 
-# Executar o projeto em modo de desenvolvimento
+# Run in development mode
 npm start
-# ou
+# or
 npm run dev
 
-# Build para produção
+# Production build
 npm run build
 ```
 
-O projeto estará disponível em `http://localhost:5173`
+The app will be available at `http://localhost:5173`.
 
-## 📋 Funcionalidades Implementadas
+## 📋 Implemented Features
 
-### ✅ Funcionalidades Principais
-- **Layout compacto em lanes**: Itens que não se sobrepõem temporalmente compartilham a mesma lane
-- **Visualização clara**: Cada item mostra nome, datas de início e fim
-- **Responsivo**: Interface adaptável a diferentes tamanhos de tela
-- **Algoritmo de lanes eficiente**: Utiliza o código fornecido em `assignLanes.js` otimizado
+### ✅ Core Features
+- **Compact lane layout**: Items that do not overlap in time share the same lane
+- **Clear visualization**: Each item shows its name, start, and end dates
+- **Responsive**: Adapts to different screen sizes
+- **Efficient lane algorithm**: Uses the optimized code in `assignLanes.ts`
 
-### ✅ Funcionalidades Extras
-- **Zoom In/Out**: Controle de zoom para visualizar diferentes escalas de tempo
-- **Drag & Drop**: Arrastar itens horizontalmente para alterar datas
-- **Redimensionamento**: Redimensionar itens pelas bordas para ajustar datas de início/fim
-- **Edição inline**: Clique no nome do item para editá-lo diretamente
-- **Indicador "Hoje"**: Linha vermelha mostra a data atual na timeline
-- **Controles visuais**: Botões de zoom e informações da timeline
+### ✅ Extras
+- **Zoom In/Out**: Control the visible time scale
+- **Drag & Drop**: Drag items horizontally to change dates
+- **Resize**: Adjust start/end dates via resize handles
+- **Inline editing**: Click the item name to edit it directly
+- **"Today" indicator**: A red line shows the current date
+- **Visual controls**: Zoom buttons and timeline information
 
-## 🎨 Decisões de Design
+## 🎨 Design Decisions
 
-### Inspiração
-- **Microsoft Project**: Para o layout de lanes e visualização de barras de tempo
-- **GitHub Projects Timeline**: Para a estética clean e controles de zoom
-- **Google Calendar**: Para o sistema de cores e feedback visual durante interações
+### Inspiration
+- **Microsoft Project**: Lane layout and bar visualization
+- **GitHub Projects Timeline**: Clean aesthetics and zoom controls
+- **Google Calendar**: Color system and visual feedback during interactions
 
-### Escolhas Técnicas
-- **Vite + React**: Build tool moderno e rápido, ideal para desenvolvimento
-- **TypeScript**: Type safety para melhor manutenibilidade do código
-- **Tailwind CSS 4**: Sistema de design consistente e utilities-first
-- **Lucide React**: Ícones SVG leves e consistentes
-- **Shadcn/ui patterns**: Design system baseado em Radix UI para componentes acessíveis
+### Technical Choices
+- **Vite + React**: Modern, fast build tool for development
+- **TypeScript**: Type safety for maintainability
+- **Tailwind CSS 4**: Utility-first design system
+- **Lucide React**: Lightweight, consistent SVG icons
+- **Clsx + Tailwind Merge**: CSS class management utilities
 
-### Layout e UX
-- **Sistema de cores automático**: Cada item recebe uma cor baseada no seu ID
-- **Feedback visual**: Estados hover, dragging e editing bem definidos
-- **Controles intuitivos**: Handles de redimensionamento e área de movimento clara
-- **Informações contextuais**: Tooltip com instruções e dados da timeline
+### Layout and UX
+- **Automatic color system**: Each item receives a color based on its ID
+- **Visual feedback**: Clear hover, dragging, and editing states
+- **Intuitive controls**: Resize handles and a clear drag area
+- **Contextual information**: Tooltip with instructions and timeline details
 
-## 💡 O que eu gosto na implementação
+## 💡 What I like about this implementation
 
-1. **Algoritmo de lanes eficiente**: O código `assignLanes.js` foi otimizado para criar o layout mais compacto possível, considerando até mesmo um buffer entre itens para melhor legibilidade.
+1. **Efficient lane algorithm**: The `assignLanes.ts` code was optimized to create the most compact layout possible, including a buffer between items for better readability.
 
-2. **Interatividade rica**: A combinação de zoom, drag & drop e edição inline oferece uma experiência de usuário completa sem sobrecarregar a interface.
+2. **Rich interactivity**: The combination of zoom, drag & drop, and inline editing offers a complete user experience without cluttering the interface.
 
-3. **Código modular**: Componentes bem separados (`Timeline`, `TimelineItem`, `TimelineHeader`) facilitam manutenção e testes.
+3. **Modular code**: Well-separated components (`Timeline`, `TimelineItem`, `TimelineHeader`) make maintenance and testing easier.
 
-4. **Performance**: Uso de `useMemo` e `useCallback` para evitar re-renderizações desnecessárias, especialmente importante com muitos itens.
+4. **Performance**: `useMemo` and `useCallback` help avoid unnecessary re-renders, especially important with many items.
 
-5. **Acessibilidade**: Uso de cores contrastantes, tooltips descritivos e navegação por teclado.
+5. **Accessibility**: Use of contrasting colors, descriptive tooltips, and keyboard navigation.
 
-## 🔄 O que eu mudaria se fosse fazer novamente
+## 🔄 What I would change if I did it again
 
-1. **Virtualização**: Para timelines com centenas de itens, implementaria virtualização para renderizar apenas itens visíveis.
+1. **Virtualization**: For timelines with hundreds of items, implement virtualization to render only visible items.
 
-2. **Estado global**: Utilizaria Context API ou Zustand para gerenciar estado, facilitando funcionalidades como undo/redo.
+2. **Global state**: Use Context API or Zustand to manage state, enabling features like undo/redo.
 
-3. **Persistência**: Adicionaria localStorage ou integração com backend para salvar alterações.
+3. **Persistence**: Add localStorage or backend integration to save changes.
 
-4. **Temas**: Sistema de temas mais robusto com modo escuro/claro.
+4. **Themes**: A more robust dark/light theme system.
 
-5. **Internacionalização**: Suporte a múltiplos idiomas, especialmente para formatos de data.
+5. **Internationalization**: Multi-language support, especially for date formats.
 
-6. **Validação mais robusta**: Validação de sobreposição de datas e conflitos durante edição.
+6. **Stronger validation**: Validate date overlaps and conflicts during editing.
 
-## 🧪 Como testaria com mais tempo
+## 🧪 How I would test with more time
 
-### Testes Unitários
+### Unit Tests
 ```typescript
-// Exemplo de testes que implementaria
+// Example tests I would implement
 describe('assignLanes', () => {
-  it('should assign items to minimum number of lanes', () => {
-    // Teste do algoritmo de lanes
+  it('should assign items to the minimum number of lanes', () => {
+    // Lane algorithm test
   });
   
   it('should handle overlapping items correctly', () => {
-    // Teste de sobreposição
+    // Overlap test
   });
 });
 
 describe('Timeline Component', () => {
   it('should render all items correctly', () => {
-    // Teste de renderização
+    // Render test
   });
   
   it('should handle zoom interactions', () => {
-    // Teste de zoom
+    // Zoom test
   });
   
   it('should support drag and drop', () => {
-    // Teste de drag & drop
+    // Drag & drop test
   });
 });
 ```
 
-### Testes de Integração
-- **Fluxo completo**: Criar → Editar → Arrastar → Redimensionar item
-- **Zoom + Interação**: Testar funcionalidades em diferentes níveis de zoom
-- **Performance**: Teste com 100+ itens para verificar responsividade
+### Integration Tests
+- **Full flow**: Create → Edit → Drag → Resize item
+- **Zoom + Interaction**: Test features at different zoom levels
+- **Performance**: Use 100+ items to verify responsiveness
 
-### Testes E2E
-- **Cypress/Playwright**: Automação de interações complexas de usuário
-- **Acessibilidade**: Teste com screen readers e navegação por teclado
-- **Cross-browser**: Compatibilidade entre diferentes navegadores
+### E2E Tests
+- **Cypress/Playwright**: Automate complex user interactions
+- **Accessibility**: Screen readers and keyboard navigation
+- **Cross-browser**: Compatibility across different browsers
 
-### Testes de Performance
-- **React DevTools Profiler**: Identificar componentes com re-renders desnecessários
-- **Lighthouse**: Métricas de performance e acessibilidade
-- **Bundle analysis**: Otimização do tamanho do bundle
+### Performance Tests
+- **React DevTools Profiler**: Identify components with unnecessary re-renders
+- **Lighthouse**: Performance and accessibility metrics
+- **Bundle analysis**: Optimize bundle size
 
-## 🛠 Tecnologias Utilizadas
+## 🛠 Technologies Used
 
-- **React 19** - Framework principal
+- **React 19** - Main framework
 - **TypeScript** - Type safety
 - **Vite** - Build tool
 - **Tailwind CSS 4** - Styling
-- **Lucide React** - Ícones
-- **Class Variance Authority** - Utility para classes condicionais
-- **Clsx + Tailwind Merge** - Gerenciamento de classes CSS
+- **Lucide React** - Icons
+- **Clsx + Tailwind Merge** - CSS class management
 
-## 📁 Estrutura do Projeto
+## 📁 Project Structure
 
 ```
 src/
 ├── components/
-│   ├── Timeline.tsx          # Componente principal
-│   ├── TimelineItem.tsx      # Item individual da timeline
-│   └── TimelineHeader.tsx    # Cabeçalho com datas
+│   ├── Timeline.tsx          # Main component
+│   ├── TimelineItem.tsx      # Individual timeline item
+│   └── TimelineHeader.tsx    # Date header
 ├── lib/
-│   └── utils.ts              # Utilitários (cn function)
-├── assignLanes.js            # Algoritmo de layout de lanes
-├── timelineItems.js          # Dados de exemplo
-├── App.tsx                   # Componente raiz
+│   └── utils.ts              # Utilities (cn function)
+├── assignLanes.ts            # Lane layout algorithm
+├── timelineItems.js          # Example data
+├── App.tsx                   # Root component
 ├── main.tsx                  # Entry point
-└── index.css                 # Estilos globais
+└── index.css                 # Global styles
 ```
 
 ---
 
-Este projeto demonstra uma implementação completa de um componente timeline com foco em usabilidade, performance e manutenibilidade do código.
+This project demonstrates a complete implementation of a timeline component with a focus on usability, performance, and code maintainability.
