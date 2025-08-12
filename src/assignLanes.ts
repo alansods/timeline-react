@@ -10,7 +10,6 @@ export function assignLanes(items: TimelineBaseItem[]): TimelineItemWithLane[] {
 
   for (const item of sortedItems) {
     const itemStart = new Date(item.startDate);
-    const itemEnd = new Date(item.endDate);
 
     let assignedLane = -1;
 

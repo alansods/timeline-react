@@ -1,6 +1,5 @@
-import React from "react";
 import Timeline from "./components/Timeline";
-import { timelineItems } from "./timelineItems.js";
+import { timelineItems } from "./timelineItems.ts";
 
 function App() {
   return (
